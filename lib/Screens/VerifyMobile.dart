@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scorefunda/Screens/Constants.dart';
 import 'package:scorefunda/Screens/Widgets/top_bar.dart';
 
 class MobileVerify extends StatefulWidget {
@@ -16,7 +17,20 @@ class _MobileVerifyState extends State<MobileVerify> {
         children: [
           TopBar(
             childWidget: Column(
-              children: [Text("sign up")],
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Welcome Shivprasad,",
+                  style: kTitleStyle,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Glad to see you",
+                  style: kSubTitleStyle,
+                ),
+              ],
             ),
           )
         ],
