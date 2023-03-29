@@ -13,7 +13,11 @@ class _MobileVerifyState extends State<MobileVerify> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [TopBar()],
+        children: [
+          TopBar(
+            childWidget: Column(),
+          )
+        ],
       ),
     );
   }
