@@ -33,7 +33,7 @@ class TopBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset(
-                'images/logo.png',
+                'images/logoLight.png',
                 width: 200,
               ),
               SizedBox(
