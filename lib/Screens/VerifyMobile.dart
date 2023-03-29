@@ -15,7 +15,9 @@ class _MobileVerifyState extends State<MobileVerify> {
       body: Column(
         children: [
           TopBar(
-            childWidget: Column(),
+            childWidget: Column(
+              children: [Text("sign up")],
+            ),
           )
         ],
       ),
