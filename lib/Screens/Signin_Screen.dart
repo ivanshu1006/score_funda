@@ -49,7 +49,7 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
           SizedBox(height: 50),
           Text("Welcome!", style: kTitleStyle.copyWith(color: Colors.black)),
-          Text("Lets sign in to begin...",
+          Text("Let's sign in to begin...",
               style: kSubTitleStyle.copyWith(color: Colors.black)),
           SizedBox(
             height: 30,
@@ -70,14 +70,17 @@ class _SignInScreenState extends State<SignInScreen> {
                   onTap: () {},
                   ButtonText: "Continue to Sign In",
                 ),
-                SizedBox(height: 25),
+                SizedBox(height: 30),
                 GestureDetector(
                   onTap: () {
                     // TOD forget password
                   },
                   child: Text(
-                    "Forget Password",
-                    style: TextStyle(fontFamily: 'QuickSand'),
+                    "Forget Password?",
+                    style: TextStyle(
+                        fontFamily: 'QuickSand',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
                   ),
                 )
               ],

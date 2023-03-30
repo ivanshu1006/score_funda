@@ -4,6 +4,7 @@ final TextStyle kTitleStyle = TextStyle(
     color: Colors.white,
     fontFamily: 'QuickSand',
     fontSize: 25,
+    letterSpacing: 1,
     fontWeight: FontWeight.bold);
 
 final TextStyle kSubTitleStyle = TextStyle(

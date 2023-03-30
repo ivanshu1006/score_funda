@@ -50,9 +50,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
           SizedBox(
             height: 30,
           ),
-          Text("Welcome!", style: kTitleStyle.copyWith(color: Colors.black)),
+          Text("Welcome!", style: kTitleStyle.copyWith(color: Colors.black87)),
           Text("Let's sign up to begin...",
-              style: kSubTitleStyle.copyWith(color: Colors.black)),
+              style: kSubTitleStyle.copyWith(color: Color(0xff36454F))),
           SizedBox(
             height: 20,
           ),

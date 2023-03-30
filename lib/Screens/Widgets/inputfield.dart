@@ -12,7 +12,8 @@ class _InputFieldState extends State<InputField> {
   Widget build(BuildContext context) {
     return Container(
         margin: EdgeInsets.symmetric(vertical: 5),
-        padding: EdgeInsets.symmetric(horizontal: 30),
+        // padding: EdgeInsets.symmetric(horizontal: 30),
+        width: 320,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
