@@ -9,10 +9,7 @@ final TextStyle kTitleStyle = TextStyle(
     letterSpacing: 1,
     fontWeight: FontWeight.bold);
 
-final TextStyle kSubTitleStyle = TextStyle(
-    fontFamily: 'QuickSand',
-    color: Colors.white,
-    fontWeight: FontWeight.bold,
-    fontSize: 15);
+final TextStyle kSubTitleStyle =
+    TextStyle(fontFamily: 'QuickSand', color: Colors.white, fontSize: 15);
 
 Color kPrimaryColor = Color(0xff6237A0);

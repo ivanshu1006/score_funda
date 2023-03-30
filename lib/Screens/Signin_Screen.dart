@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scorefunda/Screens/ChangePass.dart';
 import 'package:scorefunda/Screens/Signup_Screen.dart';
 import 'package:scorefunda/Screens/Widgets/InputField.dart';
 import 'package:scorefunda/Screens/Widgets/rounded_Button.dart';
@@ -73,6 +74,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 GestureDetector(
                   onTap: () {
                     // TOD forget password
+                    setState(() {
+                      Navigator.pushNamed(context, ForgetPassword.id);
+                    });
                   },
                   child: Text(
                     "Forget Password?",

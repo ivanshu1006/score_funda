@@ -4,14 +4,14 @@ import 'package:scorefunda/Screens/Widgets/rounded_Button.dart';
 import 'package:scorefunda/Screens/Widgets/top_bar.dart';
 import 'package:scorefunda/Screens/Widgets/inputfield.dart';
 
-class MobileVerify extends StatefulWidget {
-  const MobileVerify({super.key});
-  static String id = "MobileVerify";
+class ForgetPassword extends StatefulWidget {
+  const ForgetPassword({super.key});
+  static String id = "ChangePass";
   @override
-  State<MobileVerify> createState() => _MobileVerifyState();
+  State<ForgetPassword> createState() => _ForgetPasswordState();
 }
 
-class _MobileVerifyState extends State<MobileVerify> {
+class _ForgetPasswordState extends State<ForgetPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,17 +38,21 @@ class _MobileVerifyState extends State<MobileVerify> {
           SizedBox(
             height: 30,
           ),
-          Text("Welcome!", style: kTitleStyle.copyWith(color: kTextColor)),
-          Text("Let's sign up to begin...",
+          Text("Let us know you",
+              style: kTitleStyle.copyWith(color: kTextColor)),
+          Text("to suggest matching tests new passowrd",
               style: kSubTitleStyle.copyWith(color: kTextColor)),
           SizedBox(
             height: 25,
           ),
           InputField(
-            title: "Enter OTP",
+            title: "Date of Birth",
+          ),
+          InputField(
+            title: "Email",
           ),
           SizedBox(height: 20),
-          RoundedSidedButton(onTap: () {}, ButtonText: "Verify Mobile")
+          RoundedSidedButton(onTap: () {}, ButtonText: "Continue")
         ],
       ),
     );

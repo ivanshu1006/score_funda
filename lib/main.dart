@@ -3,6 +3,7 @@ import 'package:scorefunda/Screens/Signup_Screen.dart';
 import 'package:scorefunda/Screens/VerifyMobile.dart';
 import 'Screens/SplashScreen.dart';
 import 'Screens/Signin_Screen.dart';
+import 'Screens/ChangePass.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
           SignInScreen.id: ((context) => const SignInScreen()),
           SignUpScreen.id: ((context) => const SignUpScreen()),
           MobileVerify.id: ((context) => const MobileVerify()),
+          ForgetPassword.id: ((context) => const ForgetPassword()),
         });
   }
 }
