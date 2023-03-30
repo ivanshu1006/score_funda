@@ -40,7 +40,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         });
                       },
                       child: Text("Sign Up",
-                          style: kSubTitleStyle.copyWith(color: Colors.yellow)),
+                          style: kSubTitleStyle.copyWith(
+                              color: Color(0xffffD869))),
                     )
                   ],
                 )
@@ -48,9 +49,9 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
           SizedBox(height: 50),
-          Text("Welcome!", style: kTitleStyle.copyWith(color: Colors.black)),
+          Text("Welcome!", style: kTitleStyle.copyWith(color: kTextColor)),
           Text("Let's sign in to begin...",
-              style: kSubTitleStyle.copyWith(color: Colors.black)),
+              style: kSubTitleStyle.copyWith(color: kTextColor)),
           SizedBox(
             height: 30,
           ),
@@ -60,9 +61,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 InputField(
                   title: "Mobile No",
                 ),
-                InputField(
-                  title: "Password",
-                ),
+                InputField(title: "Password"),
                 SizedBox(
                   height: 20,
                 ),
@@ -78,6 +77,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: Text(
                     "Forget Password?",
                     style: TextStyle(
+                        color: kTextColor,
                         fontFamily: 'QuickSand',
                         fontWeight: FontWeight.bold,
                         fontSize: 16),

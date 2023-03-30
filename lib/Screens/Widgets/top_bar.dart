@@ -17,18 +17,18 @@ class TopBar extends StatelessWidget {
             width: 300,
             height: 270,
             decoration: BoxDecoration(
-                color: Color(0xff8C69DB), borderRadius: bottomBorderRadius)),
+                color: Color(0xff9969DF), borderRadius: bottomBorderRadius)),
         Container(
             width: 350,
             height: 250,
             decoration: BoxDecoration(
-                color: Color(0xff7653C3), borderRadius: bottomBorderRadius)),
+                color: Color(0xff8252C8), borderRadius: bottomBorderRadius)),
         Container(
           height: 230,
           padding: EdgeInsets.only(top: 60, left: 20),
           width: double.infinity,
           decoration: BoxDecoration(
-              color: Color(0xff593A9B), borderRadius: bottomBorderRadius),
+              color: Color(0xff6237A0), borderRadius: bottomBorderRadius),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

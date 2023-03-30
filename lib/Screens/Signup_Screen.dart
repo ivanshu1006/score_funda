@@ -39,8 +39,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Navigator.pop(context);
                         });
                       },
-                      child: Text("Sign In",
-                          style: kSubTitleStyle.copyWith(color: Colors.yellow)),
+                      child: Text(
+                        "Sign In",
+                        style:
+                            kSubTitleStyle.copyWith(color: Color(0xffffb800)),
+                      ),
                     )
                   ],
                 )
@@ -50,9 +53,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
           SizedBox(
             height: 30,
           ),
-          Text("Welcome!", style: kTitleStyle.copyWith(color: Colors.black87)),
+          Text("Welcome!", style: kTitleStyle.copyWith(color: kTextColor)),
           Text("Let's sign up to begin...",
-              style: kSubTitleStyle.copyWith(color: Color(0xff36454F))),
+              style: kSubTitleStyle.copyWith(color: kTextColor)),
           SizedBox(
             height: 20,
           ),
@@ -67,6 +70,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 InputField(
                   title: "Password",
+                  isHide: true,
                 ),
                 SizedBox(
                   height: 20,
