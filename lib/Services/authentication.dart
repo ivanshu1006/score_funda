@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
-Future<void> signUp(String name, String phoneNo, String password) async {
+Future<http.Response> signUp(
+    String name, String phoneNo, String password) async {
   var url = Uri.parse('http://restsf.nullplex.co.in/api/register');
   var params = {
     'name': name,
@@ -9,29 +9,22 @@ Future<void> signUp(String name, String phoneNo, String password) async {
     'password': password,
     'deviceid': '1234'
   };
-  var response = await http.post(url, body: params);
 
-  // print the response status code and body
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
+  http.Response res = await http.post(url, body: params);
+  print(res.body);
+  return res;
 }
 
-Future<void> signIn(String phoneNo, String password) async {
+Future<http.Response> signIn(String phoneNo, String password) async {
   var url = Uri.parse('http://restsf.nullplex.co.in/api/login');
   var params = {'mobile': phoneNo, 'password': password, 'deviceid': '1234'};
-  var response = await http.post(url, body: params);
-
-  // print the response status code and body
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
+  return await http.post(url, body: params);
 }
 
-Future<void> ValidateOtp(String mobile, String otp) async {
-  var url = Uri.parse('http://restsf.nullplex.co.in/api/register');
+Future<http.Response> ValidateOtp(String mobile, String otp) async {
+  var url = Uri.parse('http://restsf.nullplex.co.in/api/verifyOtp');
   var params = {'mobile': mobile, 'otp': otp};
-  var response = await http.post(url, body: params);
-
-  // print the response status code and body
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
+  http.Response res = await http.post(url, body: params);
+  print(res.body);
+  return res;
 }

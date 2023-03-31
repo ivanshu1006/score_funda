@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:scorefunda/Screens/Signin_Screen.dart';
 import 'package:scorefunda/Screens/VerifyMobile.dart';
@@ -7,6 +9,7 @@ import 'Constants.dart';
 import 'Widgets/rounded_Button.dart';
 import 'package:scorefunda/Services/authentication.dart' as auth;
 import 'package:http/http.dart' as http;
+import 'package:scorefunda/Screens/VerifyMobile.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -19,6 +22,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String mobile = "";
   String userName = "";
   String password = "";
+  String errorMessage = "";
 
   void setMobile(value) {
     setState(() {
@@ -103,13 +107,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 RoundedSidedButton(
                   onTap: () async {
-                    await auth.signUp(userName, mobile, password);
+                    http.Response res =
+                        await auth.signUp(userName, mobile, password);
 
-                    // setState(() {
-                    //   Navigator.pushNamed(context, MobileVerify.id);
-                    // });
+                    if (res.statusCode == 200) {
+                      setState(() {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  MobileVerify(mobileNo: mobile)),
+                        );
+                      });
+                    } else {
+                      errorMessage = jsonDecode(res.body)["message"];
+                    }
                   },
                   ButtonText: "Continue to Sign Up",
+                ),
+                SizedBox(height: 10),
+                Text(
+                  errorMessage,
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontFamily: 'QuickSand',
+                  ),
                 )
               ],
             ),

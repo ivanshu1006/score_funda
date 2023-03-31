@@ -3,9 +3,13 @@ import 'package:scorefunda/Screens/Constants.dart';
 import 'package:scorefunda/Screens/Widgets/rounded_Button.dart';
 import 'package:scorefunda/Screens/Widgets/top_bar.dart';
 import 'package:scorefunda/Screens/Widgets/inputfield.dart';
+import 'package:scorefunda/Screens/home_screen.dart';
+import 'package:scorefunda/Services/authentication.dart' as auth;
+import 'package:http/http.dart' as http;
 
 class MobileVerify extends StatefulWidget {
-  const MobileVerify({super.key});
+  MobileVerify({super.key, required this.mobileNo});
+  String mobileNo;
   static String id = "MobileVerify";
   @override
   State<MobileVerify> createState() => _MobileVerifyState();
@@ -56,7 +60,17 @@ class _MobileVerifyState extends State<MobileVerify> {
             onType: setOtp,
           ),
           SizedBox(height: 20),
-          RoundedSidedButton(onTap: () {}, ButtonText: "Verify Mobile")
+          RoundedSidedButton(
+              onTap: () async {
+                http.Response res =
+                    await auth.ValidateOtp(widget.mobileNo, otp);
+                if (res.statusCode == 200) {
+                  setState(() {
+                    Navigator.pushNamed(context, HomeScreen.id);
+                  });
+                }
+              },
+              ButtonText: "Verify Mobile")
         ],
       ),
     );
