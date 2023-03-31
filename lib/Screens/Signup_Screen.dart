@@ -5,6 +5,8 @@ import 'package:scorefunda/Screens/Widgets/inputfield.dart';
 import 'Widgets/top_bar.dart';
 import 'Constants.dart';
 import 'Widgets/rounded_Button.dart';
+import 'package:scorefunda/Services/authentication.dart' as auth;
+import 'package:http/http.dart' as http;
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -14,6 +16,28 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  String mobile = "";
+  String userName = "";
+  String password = "";
+
+  void setMobile(value) {
+    setState(() {
+      mobile = value;
+    });
+  }
+
+  void setUserName(value) {
+    setState(() {
+      userName = value;
+    });
+  }
+
+  void setPassword(value) {
+    setState(() {
+      password = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,22 +88,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
               children: [
                 InputField(
                   title: "Full Name",
+                  onType: setUserName,
                 ),
                 InputField(
                   title: "Mobile No",
+                  onType: setMobile,
                 ),
                 InputField(
                   title: "Password",
-                  isHide: true,
+                  onType: setPassword,
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 RoundedSidedButton(
-                  onTap: () {
-                    setState(() {
-                      Navigator.pushNamed(context, MobileVerify.id);
-                    });
+                  onTap: () async {
+                    await auth.signUp(userName, mobile, password);
+
+                    // setState(() {
+                    //   Navigator.pushNamed(context, MobileVerify.id);
+                    // });
                   },
                   ButtonText: "Continue to Sign Up",
                 )

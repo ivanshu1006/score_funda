@@ -12,6 +12,13 @@ class MobileVerify extends StatefulWidget {
 }
 
 class _MobileVerifyState extends State<MobileVerify> {
+  String otp = "";
+  void setOtp(value) {
+    setState(() {
+      otp = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +53,7 @@ class _MobileVerifyState extends State<MobileVerify> {
           ),
           InputField(
             title: "Enter OTP",
+            onType: setOtp,
           ),
           SizedBox(height: 20),
           RoundedSidedButton(onTap: () {}, ButtonText: "Verify Mobile")

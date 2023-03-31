@@ -14,6 +14,21 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  String mobileNo = "";
+  String password = "";
+
+  void SetPassword(pass) {
+    setState(() {
+      password = pass;
+    });
+  }
+
+  void SetMobileNo(value) {
+    setState(() {
+      mobileNo = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,21 +74,20 @@ class _SignInScreenState extends State<SignInScreen> {
           Flexible(
             child: Column(
               children: [
-                InputField(
-                  title: "Mobile No",
-                ),
-                InputField(title: "Password"),
+                InputField(title: "Mobile No", onType: SetMobileNo),
+                InputField(title: "Password", onType: SetPassword),
                 SizedBox(
                   height: 20,
                 ),
                 RoundedSidedButton(
-                  onTap: () {},
+                  onTap: () {
+                    print("mobile no : $mobileNo. password : $password");
+                  },
                   ButtonText: "Continue to Sign In",
                 ),
                 SizedBox(height: 30),
                 GestureDetector(
-                  onTap: () {
-                    // TOD forget password
+                  onTap: () async {
                     setState(() {
                       Navigator.pushNamed(context, ForgetPassword.id);
                     });

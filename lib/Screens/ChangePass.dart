@@ -12,6 +12,21 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class _ForgetPasswordState extends State<ForgetPassword> {
+  String dateOfBirth = "";
+  String email = "";
+
+  void setDob(value) {
+    setState(() {
+      dateOfBirth = value;
+    });
+  }
+
+  void setEmail(value) {
+    setState(() {
+      email = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,9 +62,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           ),
           InputField(
             title: "Date of Birth",
+            onType: setDob,
           ),
           InputField(
             title: "Email",
+            onType: setEmail,
           ),
           SizedBox(height: 20),
           RoundedSidedButton(onTap: () {}, ButtonText: "Continue")

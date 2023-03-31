@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:scorefunda/Screens/Constants.dart';
 
 class InputField extends StatefulWidget {
-  const InputField({super.key, this.title, this.isHide = false});
+  InputField({super.key, this.title, required this.onType});
   final String? title;
-  final bool isHide;
+  final Function onType;
+
   @override
   State<InputField> createState() => _InputFieldState();
 }
@@ -36,6 +37,9 @@ class _InputFieldState extends State<InputField> {
                   color: Color(0xffF6F6F6),
                   borderRadius: BorderRadius.circular(25)),
               child: TextField(
+                onChanged: (value) {
+                  widget.onType(value);
+                },
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(border: InputBorder.none),
               ),
