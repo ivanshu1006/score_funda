@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:scorefunda/Screens/ChangePass.dart';
+import 'package:scorefunda/Screens/verifyDob.dart';
 import 'package:scorefunda/Screens/Signup_Screen.dart';
 import 'package:scorefunda/Screens/Widgets/InputField.dart';
 import 'package:scorefunda/Screens/Widgets/rounded_Button.dart';
@@ -39,103 +39,125 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Column(
-        children: [
-          TopBar(
-            childWidget: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Sign In", style: kTitleStyle),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    Text("Don't have an account?", style: kSubTitleStyle),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    GestureDetector(
-                      onTap: () {
+    return ModalProgressHUD(
+      inAsyncCall: showModal,
+      progressIndicator: CircularProgressIndicator(
+        color: kPrimaryColor,
+      ),
+      color: kPrimaryColor,
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Column(
+          children: [
+            TopBar(
+              childWidget: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Sign In", style: kTitleStyle),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Text("Don't have an account?", style: kSubTitleStyle),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            Navigator.pushNamed(context, SignUpScreen.id);
+                          });
+                        },
+                        child: Text("Sign Up",
+                            style: kSubTitleStyle.copyWith(
+                                color: Color(0xffffD869))),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: 50),
+                  Text("Welcome!",
+                      style: kTitleStyle.copyWith(color: kTextColor)),
+                  Text("Let's sign in to begin...",
+                      style: kSubTitleStyle.copyWith(color: kTextColor)),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  InputField(title: "Mobile No", onType: SetMobileNo),
+                  InputField(title: "Password", onType: SetPassword),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  RoundedSidedButton(
+                    onTap: () async {
+                      if (mobileNo != "" && password != "") {
                         setState(() {
-                          Navigator.pushNamed(context, SignUpScreen.id);
+                          showModal = true;
                         });
-                      },
-                      child: Text("Sign Up",
-                          style: kSubTitleStyle.copyWith(
-                              color: Color(0xffffD869))),
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(height: 50),
-                Text("Welcome!",
-                    style: kTitleStyle.copyWith(color: kTextColor)),
-                Text("Let's sign in to begin...",
-                    style: kSubTitleStyle.copyWith(color: kTextColor)),
-                SizedBox(
-                  height: 30,
-                ),
-                InputField(title: "Mobile No", onType: SetMobileNo),
-                InputField(title: "Password", onType: SetPassword),
-                SizedBox(
-                  height: 20,
-                ),
-                RoundedSidedButton(
-                  onTap: () async {
-                    setState(() {
-                      showModal = true;
-                    });
-                    http.Response res = await auth.signIn(mobileNo, password);
-                    if (res.statusCode == 200) {
+
+                        http.Response res =
+                            await auth.signIn(mobileNo, password);
+                        if (res.statusCode == 200) {
+                          setState(() {
+                            showModal = false;
+                            Navigator.pushNamed(context, HomeScreen.id);
+                          });
+                        } else {
+                          setState(() {
+                            showModal = false;
+                            errorMessage =
+                                jsonDecode(res.body)["message"].toString();
+                          });
+                        }
+                      } else {
+                        if (mobileNo == "") {
+                          setState(() {
+                            errorMessage = "please type your Mobile no";
+                          });
+                        } else if (password == "") {
+                          setState(() {
+                            errorMessage = "password field is required";
+                          });
+                        }
+                      }
+                    },
+                    ButtonText: "Continue to Sign In",
+                  ),
+                  SizedBox(height: 30),
+                  GestureDetector(
+                    onTap: () async {
                       setState(() {
-                        showModal = false;
-                        Navigator.pushNamed(context, HomeScreen.id);
+                        Navigator.pushNamed(context, VerifyDOB.id);
                       });
-                    } else {
-                      setState(() {
-                        showModal = false;
-                        errorMessage = jsonDecode(res.body)["message"];
-                      });
-                    }
-                  },
-                  ButtonText: "Continue to Sign In",
-                ),
-                SizedBox(height: 30),
-                GestureDetector(
-                  onTap: () async {
-                    setState(() {
-                      Navigator.pushNamed(context, ForgetPassword.id);
-                    });
-                  },
-                  child: Text(
-                    "Forget Password?",
+                    },
+                    child: Text(
+                      "Forget Password?",
+                      style: TextStyle(
+                          color: kTextColor,
+                          fontFamily: 'QuickSand',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    errorMessage,
                     style: TextStyle(
-                        color: kTextColor,
-                        fontFamily: 'QuickSand',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16),
+                      color: Colors.red,
+                      fontFamily: 'QuickSand',
+                    ),
                   ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  errorMessage,
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontFamily: 'QuickSand',
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

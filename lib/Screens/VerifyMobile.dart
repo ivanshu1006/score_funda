@@ -4,14 +4,20 @@ import 'package:scorefunda/Screens/Widgets/rounded_Button.dart';
 import 'package:scorefunda/Screens/Widgets/top_bar.dart';
 import 'package:scorefunda/Screens/Widgets/inputfield.dart';
 import 'package:scorefunda/Screens/home_screen.dart';
+import 'package:scorefunda/Screens/verifyDob.dart';
 import 'package:scorefunda/Services/authentication.dart' as auth;
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 
 class MobileVerify extends StatefulWidget {
-  MobileVerify({super.key, required this.mobileNo, required this.sendOtp});
+  MobileVerify(
+      {super.key,
+      required this.mobileNo,
+      required this.sendOtp,
+      required this.userName});
   String mobileNo;
   static String id = "MobileVerify";
+  String userName;
   String sendOtp;
   @override
   State<MobileVerify> createState() => _MobileVerifyState();
@@ -46,8 +52,8 @@ class _MobileVerifyState extends State<MobileVerify> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Welcome Shivprasad,",
-                  style: kTitleStyle,
+                  "Welcome ${widget.userName}",
+                  style: kTitleStyle.copyWith(fontSize: 22),
                 ),
                 SizedBox(
                   height: 10,
@@ -79,7 +85,13 @@ class _MobileVerifyState extends State<MobileVerify> {
                     await auth.ValidateOtp(widget.mobileNo, otp);
                 if (res.statusCode == 200) {
                   setState(() {
-                    Navigator.pushNamed(context, HomeScreen.id);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              VerifyDOB(userName: widget.userName)),
+                    );
+                    ;
                   });
                 }
               },

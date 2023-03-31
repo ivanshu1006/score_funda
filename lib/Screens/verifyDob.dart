@@ -4,14 +4,15 @@ import 'package:scorefunda/Screens/Widgets/rounded_Button.dart';
 import 'package:scorefunda/Screens/Widgets/top_bar.dart';
 import 'package:scorefunda/Screens/Widgets/inputfield.dart';
 
-class ForgetPassword extends StatefulWidget {
-  const ForgetPassword({super.key});
-  static String id = "ChangePass";
+class VerifyDOB extends StatefulWidget {
+  VerifyDOB({super.key, required this.userName});
+  static String id = "VerifyDOB";
+  String userName = "";
   @override
-  State<ForgetPassword> createState() => _ForgetPasswordState();
+  State<VerifyDOB> createState() => _VerifyDOBState();
 }
 
-class _ForgetPasswordState extends State<ForgetPassword> {
+class _VerifyDOBState extends State<VerifyDOB> {
   String dateOfBirth = "";
   String email = "";
 
@@ -37,7 +38,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Welcome Shivprasad,",
+                  "Welcome ${widget.userName},",
                   style: kTitleStyle,
                 ),
                 SizedBox(
