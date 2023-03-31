@@ -40,7 +40,6 @@ class _InputFieldState extends State<InputField> {
                 onChanged: (value) {
                   widget.onType(value);
                 },
-                keyboardType: TextInputType.phone,
                 decoration: InputDecoration(border: InputBorder.none),
               ),
             )

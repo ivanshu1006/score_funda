@@ -111,12 +111,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         await auth.signUp(userName, mobile, password);
 
                     if (res.statusCode == 200) {
+                      String otp =
+                          jsonDecode(res.body)["data"]["otp"].toString();
                       setState(() {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  MobileVerify(mobileNo: mobile)),
+                                  MobileVerify(mobileNo: mobile, sendOtp: otp)),
                         );
                       });
                     } else {

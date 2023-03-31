@@ -6,11 +6,13 @@ import 'package:scorefunda/Screens/Widgets/inputfield.dart';
 import 'package:scorefunda/Screens/home_screen.dart';
 import 'package:scorefunda/Services/authentication.dart' as auth;
 import 'package:http/http.dart' as http;
+import 'package:fluttertoast/fluttertoast.dart';
 
 class MobileVerify extends StatefulWidget {
-  MobileVerify({super.key, required this.mobileNo});
+  MobileVerify({super.key, required this.mobileNo, required this.sendOtp});
   String mobileNo;
   static String id = "MobileVerify";
+  String sendOtp;
   @override
   State<MobileVerify> createState() => _MobileVerifyState();
 }
@@ -20,6 +22,15 @@ class _MobileVerifyState extends State<MobileVerify> {
   void setOtp(value) {
     setState(() {
       otp = value;
+    });
+  }
+
+  initState() {
+    setState(() {
+      Fluttertoast.showToast(
+          timeInSecForIosWeb: 8,
+          backgroundColor: kPrimaryColor,
+          msg: "your otp is ${widget.sendOtp}");
     });
   }
 
