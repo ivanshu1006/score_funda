@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:scorefunda/Screens/Constants.dart';
 import 'package:scorefunda/Screens/Widgets/rounded_Button.dart';
@@ -41,62 +43,71 @@ class _MobileVerifyState extends State<MobileVerify> {
     });
   }
 
+// 634179
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          //----------------top bar ----------------------
-          TopBar(
-            childWidget: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Welcome ${widget.userName}",
-                  style: kTitleStyle.copyWith(fontSize: 22),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Glad to see you",
-                  style: kSubTitleStyle,
-                ),
-              ],
+      body: SingleChildScrollView(
+        reverse: true,
+        child: Column(
+          children: [
+            //----------------top bar ----------------------
+            TopBar(
+              childWidget: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Welcome ${widget.userName}",
+                    style: kTitleStyle.copyWith(fontSize: 22),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Glad to see you",
+                    style: kSubTitleStyle,
+                  ),
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Text("Welcome!", style: kTitleStyle.copyWith(color: kTextColor)),
-          Text("Let's sign up to begin...",
-              style: kSubTitleStyle.copyWith(color: kTextColor)),
-          SizedBox(
-            height: 25,
-          ),
-          InputField(
-            title: "Enter OTP",
-            onType: setOtp,
-          ),
-          SizedBox(height: 20),
-          RoundedSidedButton(
-              onTap: () async {
-                http.Response res =
-                    await auth.ValidateOtp(widget.mobileNo, otp);
-                if (res.statusCode == 200) {
-                  setState(() {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              VerifyDOB(userName: widget.userName)),
-                    );
-                    ;
-                  });
-                }
-              },
-              ButtonText: "Verify Mobile")
-        ],
+            SizedBox(
+              height: 30,
+            ),
+            Text("Welcome!", style: kTitleStyle.copyWith(color: kTextColor)),
+            Text("Let's sign up to begin...",
+                style: kSubTitleStyle.copyWith(color: kTextColor)),
+            SizedBox(
+              height: 25,
+            ),
+            InputField(
+              title: "Enter OTP",
+              onType: setOtp,
+            ),
+            SizedBox(height: 20),
+            RoundedSidedButton(
+                onTap: () async {
+                  http.Response res =
+                      await auth.ValidateOtp(widget.mobileNo, otp);
+                  String Token =
+                      jsonDecode(res.body)["data"]["tokendata"]["token"];
+                  if (res.statusCode == 200) {
+                    setState(() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => VerifyDOB(
+                                  userName: widget.userName,
+                                  token: Token,
+                                )),
+                      );
+                    });
+                  }
+                },
+                ButtonText: "Verify Mobile"),
+            SizedBox(height: 30)
+          ],
+        ),
       ),
     );
   }

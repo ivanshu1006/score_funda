@@ -53,113 +53,109 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
       color: kPrimaryColor,
       child: Scaffold(
-        body: Column(
-          children: [
-            TopBar(
-              childWidget: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Sign Up", style: kTitleStyle),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Text("Already have an account?", style: kSubTitleStyle),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            Navigator.pop(context);
-                          });
-                        },
-                        child: Text(
-                          "Sign In",
-                          style:
-                              kSubTitleStyle.copyWith(color: Color(0xffffb800)),
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Text("Welcome!", style: kTitleStyle.copyWith(color: kTextColor)),
-            Text("Let's sign up to begin...",
-                style: kSubTitleStyle.copyWith(color: kTextColor)),
-            SizedBox(
-              height: 20,
-            ),
-            Flexible(
-              child: Column(
-                children: [
-                  InputField(
-                    title: "Full Name",
-                    onType: setUserName,
-                  ),
-                  InputField(
-                    title: "Mobile No",
-                    onType: setMobile,
-                  ),
-                  InputField(
-                    title: "Password",
-                    onType: setPassword,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  RoundedSidedButton(
-                    onTap: () async {
-                      setState(() {
-                        showModal = true;
-                      });
-
-                      http.Response res =
-                          await auth.signUp(userName, mobile, password);
-
-                      if (res.statusCode == 200) {
-                        String otp =
-                            jsonDecode(res.body)["data"]["otp"].toString();
-                        String usrName = jsonDecode(res.body)["data"]["name"];
-                        setState(() {
-                          showModal = false;
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MobileVerify(
-                                      mobileNo: mobile,
-                                      sendOtp: otp,
-                                      userName: usrName,
-                                    )),
-                          );
-                        });
-                      } else {
-                        setState(() {
-                          showModal = false;
-                        });
-
-                        errorMessage = jsonDecode(res.body)["message"];
-                      }
-                    },
-                    ButtonText: "Continue to Sign Up",
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    errorMessage,
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontFamily: 'QuickSand',
+        body: SingleChildScrollView(
+          reverse: true,
+          child: Column(
+            children: [
+              TopBar(
+                childWidget: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Sign Up", style: kTitleStyle),
+                    SizedBox(
+                      height: 10,
                     ),
-                  )
-                ],
+                    Row(
+                      children: [
+                        Text("Already have an account?", style: kSubTitleStyle),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              Navigator.pop(context);
+                            });
+                          },
+                          child: Text(
+                            "Sign In",
+                            style: kSubTitleStyle.copyWith(
+                                color: Color(0xffffb800)),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
-            )
-          ],
+              SizedBox(
+                height: 30,
+              ),
+              Text("Welcome!", style: kTitleStyle.copyWith(color: kTextColor)),
+              Text("Let's sign up to begin...",
+                  style: kSubTitleStyle.copyWith(color: kTextColor)),
+              SizedBox(
+                height: 20,
+              ),
+              InputField(
+                title: "Full Name",
+                onType: setUserName,
+              ),
+              InputField(
+                title: "Mobile No",
+                onType: setMobile,
+              ),
+              InputField(
+                title: "Password",
+                onType: setPassword,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              RoundedSidedButton(
+                onTap: () async {
+                  setState(() {
+                    showModal = true;
+                  });
+
+                  http.Response res =
+                      await auth.signUp(userName, mobile, password);
+
+                  if (res.statusCode == 200) {
+                    String otp = jsonDecode(res.body)["data"]["otp"].toString();
+                    String usrName = jsonDecode(res.body)["data"]["name"];
+                    setState(() {
+                      showModal = false;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MobileVerify(
+                                  mobileNo: mobile,
+                                  sendOtp: otp,
+                                  userName: usrName,
+                                )),
+                      );
+                    });
+                  } else {
+                    setState(() {
+                      showModal = false;
+                    });
+
+                    errorMessage = jsonDecode(res.body)["message"];
+                  }
+                },
+                ButtonText: "Continue to Sign Up",
+              ),
+              SizedBox(height: 10),
+              Text(
+                errorMessage,
+                style: TextStyle(
+                  color: Colors.red,
+                  fontFamily: 'QuickSand',
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

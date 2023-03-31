@@ -30,3 +30,11 @@ Future<http.Response> ValidateOtp(String mobile, String otp) async {
   print(res.body);
   return res;
 }
+
+Future<http.Response> SignUpInfo(String dob, String email, String token) async {
+  var url = Uri.parse('http://restsf.nullplex.co.in/api/registerinfo');
+  var params = {'dob': dob, 'email': email, 'token': token};
+  http.Response res = await http.put(url, body: params);
+  print(res.body);
+  return res;
+}

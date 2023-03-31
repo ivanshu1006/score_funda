@@ -46,117 +46,116 @@ class _SignInScreenState extends State<SignInScreen> {
       ),
       color: kPrimaryColor,
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Column(
-          children: [
-            TopBar(
-              childWidget: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Sign In", style: kTitleStyle),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Text("Don't have an account?", style: kSubTitleStyle),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            Navigator.pushNamed(context, SignUpScreen.id);
-                          });
-                        },
-                        child: Text("Sign Up",
-                            style: kSubTitleStyle.copyWith(
-                                color: Color(0xffffD869))),
-                      )
-                    ],
-                  )
-                ],
+        body: SingleChildScrollView(
+          reverse: true,
+          child: Column(
+            children: [
+              TopBar(
+                childWidget: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Sign In", style: kTitleStyle),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Text("Don't have an account?", style: kSubTitleStyle),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              Navigator.pushNamed(context, SignUpScreen.id);
+                            });
+                          },
+                          child: Text("Sign Up",
+                              style: kSubTitleStyle.copyWith(
+                                  color: Color(0xffffD869))),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
-            ),
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: 50),
-                  Text("Welcome!",
-                      style: kTitleStyle.copyWith(color: kTextColor)),
-                  Text("Let's sign in to begin...",
-                      style: kSubTitleStyle.copyWith(color: kTextColor)),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  InputField(title: "Mobile No", onType: SetMobileNo),
-                  InputField(title: "Password", onType: SetPassword),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  RoundedSidedButton(
-                    onTap: () async {
-                      if (mobileNo != "" && password != "") {
-                        setState(() {
-                          showModal = true;
-                        });
-
-                        http.Response res =
-                            await auth.signIn(mobileNo, password);
-                        if (res.statusCode == 200) {
-                          setState(() {
-                            showModal = false;
-                            Navigator.pushNamed(context, HomeScreen.id);
-                          });
-                        } else {
-                          setState(() {
-                            showModal = false;
-                            errorMessage =
-                                jsonDecode(res.body)["message"].toString();
-                          });
-                        }
-                      } else {
-                        if (mobileNo == "") {
-                          setState(() {
-                            errorMessage = "please type your Mobile no";
-                          });
-                        } else if (password == "") {
-                          setState(() {
-                            errorMessage = "password field is required";
-                          });
-                        }
-                      }
-                    },
-                    ButtonText: "Continue to Sign In",
-                  ),
-                  SizedBox(height: 30),
-                  GestureDetector(
-                    onTap: () async {
+              Column(children: [
+                SizedBox(height: 50),
+                Text("Welcome!",
+                    style: kTitleStyle.copyWith(color: kTextColor)),
+                Text("Let's sign in to begin...",
+                    style: kSubTitleStyle.copyWith(color: kTextColor)),
+                SizedBox(
+                  height: 30,
+                ),
+                InputField(title: "Mobile No", onType: SetMobileNo),
+                InputField(title: "Password", onType: SetPassword),
+                SizedBox(
+                  height: 20,
+                ),
+                RoundedSidedButton(
+                  onTap: () async {
+                    if (mobileNo != "" && password != "") {
                       setState(() {
-                        Navigator.pushNamed(context, VerifyDOB.id);
+                        showModal = true;
                       });
-                    },
-                    child: Text(
-                      "Forget Password?",
-                      style: TextStyle(
-                          color: kTextColor,
-                          fontFamily: 'QuickSand',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    errorMessage,
+
+                      http.Response res = await auth.signIn(mobileNo, password);
+                      if (res.statusCode == 200) {
+                        setState(() {
+                          showModal = false;
+                          Navigator.pushNamed(context, HomeScreen.id);
+                        });
+                      } else {
+                        setState(() {
+                          showModal = false;
+                          errorMessage =
+                              jsonDecode(res.body)["message"].toString();
+                        });
+                      }
+                    } else {
+                      if (mobileNo == "") {
+                        setState(() {
+                          errorMessage = "please type your Mobile no";
+                        });
+                      } else if (password == "") {
+                        setState(() {
+                          errorMessage = "password field is required";
+                        });
+                      }
+                    }
+                  },
+                  ButtonText: "Continue to Sign In",
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    setState(() {
+                      Navigator.pushNamed(context, VerifyDOB.id);
+                    });
+                  },
+                  child: Text(
+                    "Forget Password?",
                     style: TextStyle(
-                      color: Colors.red,
-                      fontFamily: 'QuickSand',
-                    ),
+                        color: kTextColor,
+                        fontFamily: 'QuickSand',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
                   ),
-                ],
-              ),
-            )
-          ],
+                ),
+                SizedBox(height: 10),
+                Text(
+                  errorMessage,
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontFamily: 'QuickSand',
+                  ),
+                ),
+              ]),
+            ],
+          ),
         ),
       ),
     );
