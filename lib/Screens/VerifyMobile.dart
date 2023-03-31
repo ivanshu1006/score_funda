@@ -26,6 +26,7 @@ class _MobileVerifyState extends State<MobileVerify> {
   }
 
   initState() {
+    // ------------ trigger toaster -------------------
     setState(() {
       Fluttertoast.showToast(
           timeInSecForIosWeb: 8,
@@ -39,6 +40,7 @@ class _MobileVerifyState extends State<MobileVerify> {
     return Scaffold(
       body: Column(
         children: [
+          //----------------top bar ----------------------
           TopBar(
             childWidget: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
