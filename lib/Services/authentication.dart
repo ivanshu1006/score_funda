@@ -38,3 +38,25 @@ Future<http.Response> SignUpInfo(String dob, String email, String token) async {
   print(res.body);
   return res;
 }
+
+Future<http.Response> ForgotPassword(String mobileno) async {
+  var url = Uri.parse('http://restsf.nullplex.co.in/api/forgototp');
+  var params = {'mobile': mobileno};
+  http.Response res = await http.post(url, body: params);
+  // print(res.body);
+  return res;
+}
+
+Future<http.Response> ResetPassword(
+    String otp, String mobile, String password, String confirmPassword) async {
+  var url = Uri.parse('http://restsf.nullplex.co.in/api/forgototp');
+  var params = {
+    'otp': otp,
+    'mobile': mobile,
+    'password': password,
+    'confirmPassword': confirmPassword
+  };
+  http.Response res = await http.post(url, body: params);
+  print(res.body);
+  return res;
+}

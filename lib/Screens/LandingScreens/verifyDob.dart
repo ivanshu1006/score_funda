@@ -5,7 +5,7 @@ import 'package:scorefunda/Screens/Widgets/top_bar.dart';
 import 'package:scorefunda/Screens/Widgets/inputfield.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:http/http.dart' as http;
-import 'package:scorefunda/Screens/home_screen.dart';
+import 'package:scorefunda/Screens/HomeScreen/home_screen.dart';
 import 'package:scorefunda/Services/authentication.dart' as auth;
 
 class VerifyDOB extends StatefulWidget {

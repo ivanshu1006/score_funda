@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:scorefunda/Screens/Signin_Screen.dart';
+import 'package:scorefunda/Screens/landingScreens/Signin_Screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

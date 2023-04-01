@@ -1,13 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:scorefunda/Screens/verifyDob.dart';
-import 'package:scorefunda/Screens/Signup_Screen.dart';
+import 'package:scorefunda/Screens/LandingScreens/ForgotPassword.dart';
+import 'package:scorefunda/Screens/landingScreens/verifyDob.dart';
+import 'package:scorefunda/Screens/landingScreens/Signup_Screen.dart';
 import 'package:scorefunda/Screens/Widgets/InputField.dart';
-import 'package:scorefunda/Screens/Widgets/rounded_Button.dart';
 import 'package:scorefunda/Screens/Widgets/top_bar.dart';
-import 'package:scorefunda/Screens/home_screen.dart';
-import 'Constants.dart';
+import 'package:scorefunda/Screens/Widgets/rounded_Button.dart';
+import 'package:scorefunda/Screens/HomeScreen/home_screen.dart';
+import 'package:scorefunda/Screens/Constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:scorefunda/Services/authentication.dart' as auth;
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -133,7 +134,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 GestureDetector(
                   onTap: () async {
                     setState(() {
-                      Navigator.pushNamed(context, VerifyDOB.id);
+                      Navigator.pushNamed(context, ForgotPassword.id);
                     });
                   },
                   child: Text(

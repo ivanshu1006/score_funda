@@ -1,15 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:scorefunda/Screens/Signin_Screen.dart';
-import 'package:scorefunda/Screens/VerifyMobile.dart';
+import 'package:scorefunda/Screens/landingScreens/Signin_Screen.dart';
+import 'package:scorefunda/Screens/landingScreens/VerifyMobile.dart';
 import 'package:scorefunda/Screens/Widgets/inputfield.dart';
-import 'Widgets/top_bar.dart';
-import 'Constants.dart';
-import 'Widgets/rounded_Button.dart';
+import 'package:scorefunda/Screens/Widgets/top_bar.dart';
+import 'package:scorefunda/Screens/Constants.dart';
+import 'package:scorefunda/Screens/Widgets/rounded_Button.dart';
 import 'package:scorefunda/Services/authentication.dart' as auth;
 import 'package:http/http.dart' as http;
-import 'package:scorefunda/Screens/VerifyMobile.dart';
+import 'package:scorefunda/Screens/landingScreens/VerifyMobile.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class SignUpScreen extends StatefulWidget {
